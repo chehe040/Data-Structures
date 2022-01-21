@@ -1,45 +1,38 @@
 //
 //  main.cpp
-//  min ele-sorted rotated array
+//  Peak Element
 //
-//  Created by Chetna on 21/01/22.
+//  Created by Chetna on 22/01/22.
 //
 
-int minNumber(int arr[], int low, int high)
+class Solution
+{
+    public:
+    int findPeakUntil(int arr[], int low, int high, int n)
     {
-        //the min element is the only element whose previous element is greater than itslef
-        //i.e. when there is no previous element
-        if(high<low){
-            return arr[0];
-        }
-        //when there is no middle element
-        if(low==high){
-            return arr[low];
-        }
-        //compute middle element
         int mid=(low+high)/2;
+        //if mid is last or first index with first element graeter than next
+        //also check if mid element is greater than mid-1 and mid+1
         
-        //check if the element at (mid+1) is the min element. Consider cases like {3,4,5,1,2}
-        if(high>mid && arr[mid] > arr[mid+1])
+        if((mid==0 || arr[mid-1] <= arr[mid]) && (mid==n-1 || arr[mid+1] <= arr[mid]))
         {
-            return arr[mid+1];
+            return mid;
         }
-        
-        //check if the middle element itself is the min element
-        if(low<mid && arr[mid] < arr[mid-1])
+        //if mid is not at 0 index, if so then check if mid element is lesser than the previous element and then recurse for the lower half
+        else if(mid>0 && arr[mid-1]> arr[mid])
         {
-            return arr[mid];
+            return findPeakUntil(arr, low,mid-1,n);
         }
-        
-        //decide whether to left half or the right half of the array since one half of the rotated sorted array will always be sorted so we can ignore one half utilising this.
-        if(arr[high] > arr[mid])
-        {
-            return minNumber(arr,low,mid-1);
-        }
+        //else recurse for the upper half
         else
         {
-        return minNumber(arr,mid+1,high);
+            return findPeakUntil(arr, mid+1,high,n);
         }
-        
+    }
+    
+    
+    int peakElement(int arr[], int n)
+    {
+       return findPeakUntil(arr, 0, n-1, n);
     }
 };
