@@ -35,7 +35,7 @@ View UX/UI design on [Behance](https://www.behance.net/gallery/105665555/Radio-L
 Download the repo with:
 
 ```bash
-$ git clone https://github.com/Aimanski12/radio-live proj-name
+$ git clone https://github.com/chehe040/radio-live proj-name
 ```
 
 After downloading the repo you can cd into the `proj-name` and then open up your console and type 
